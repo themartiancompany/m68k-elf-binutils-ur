@@ -35,6 +35,37 @@
 # Be warned that multilib packages will take a lot more time to build, and
 # will also require more disk space.
 
+_os="$(
+  uname \
+    -o)"
+if [[ "${_os}" == "Android" ]]; then
+  _libc="ndk-sysroot"
+  _compiler="clang"
+  _libcompiler="libllvm"
+  _sh="dash"
+elif [[ "${_os}" == "GNU/Linux" ]]; then
+  _libc="glibc"
+  _compiler="gcc"
+  _libcompiler="libgcc"
+  _sh="sh"
+elif [[ "${_os}" == "Msys" ]]; then
+  _libc="msys2-w32api-runtime"
+  _libc_headers="msys2-w32api-headers"
+  _compiler="gcc"
+  _libcompiler="gcc-libs"
+  _sh="sh"
+else
+  _msg=(
+    "Unknown os '${_os}'."
+  )
+  msg \
+    "${_msg[*]}"
+  _libc="msys2-w32api-runtime"
+  _libc_headers="msys2-w32api-headers"
+  _compiler="gcc"
+  _libcompiler="gcc-libs"
+  _sh="sh"
+fi
 _target=m68k-elf
 _target_cpu=m68000
 pkgbase="${_target}-binutils"
@@ -42,7 +73,7 @@ pkgname=(
   "${pkgbase}"
 )
 pkgver=2.45
-pkgrel=2
+pkgrel=3
 _pkgdesc=(
   "A set of programs to assemble and"
   "manipulate binary and object files"
@@ -58,10 +89,27 @@ license=(
   'GPL'
 )
 depends=(
-  'glibc>=2.23'
   'zlib'
 )
-makedepends=()
+if [[ "" != "Android" ]]; then
+  depends+=(
+    "${_libc}>=2.23"
+  )
+else
+  depends+=(
+    "${_libc}"
+  )
+fi
+makedepends=(
+  "${_libc}"
+  "${_compiler}"
+)
+if [[ "${_os}" == "Msys" ]]; then
+  makedepends+=(
+    "${_libc_headers}"
+    "windows-default-manifest"
+  )
+fi
 options=(
   'staticlibs'
   '!distcc'
