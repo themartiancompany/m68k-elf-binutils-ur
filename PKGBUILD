@@ -42,7 +42,7 @@ pkgname=(
   "${pkgbase}"
 )
 pkgver=2.45
-pkgrel=1
+pkgrel=2
 _pkgdesc=(
   "A set of programs to assemble and"
   "manipulate binary and object files"
