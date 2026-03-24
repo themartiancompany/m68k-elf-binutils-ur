@@ -73,7 +73,7 @@ pkgname=(
   "${pkgbase}"
 )
 pkgver=2.45
-pkgrel=3
+pkgrel=4
 _pkgdesc=(
   "A set of programs to assemble and"
   "manipulate binary and object files"
@@ -115,6 +115,7 @@ options=(
   '!distcc'
   '!ccache'
 )
+_sig_sum="7c0f34aa65aa1e73eb5333bef182a43b16ece95fab5e74930c0ac0bec456c023"
 PKGEXT=".pkg.tar.zst"
 source=(
   "https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz"
@@ -122,7 +123,7 @@ source=(
 )
 sha256sums=(
   "c50c0e7f9cb188980e2cc97e4537626b1672441815587f1eab69d2a1bfbef5d2"
-  SKIP
+  "SKIP"
 )
 validpgpkeys=(
   "3A24BC1E8FB409FA9F14371813FCEF89DD9E3C4F"
