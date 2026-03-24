@@ -73,7 +73,7 @@ pkgname=(
   "${pkgbase}"
 )
 pkgver=2.45
-pkgrel=6
+pkgrel=7
 _pkgdesc=(
   "A set of programs to assemble and"
   "manipulate binary and object files"
@@ -82,6 +82,7 @@ _pkgdesc=(
 pkgdesc="${_pkgdesc[*]}"
 arch=(
   "aarch64"
+  "arm"
   "armv8l"
   "armv7l"
   'i686'
