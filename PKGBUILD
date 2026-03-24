@@ -73,7 +73,7 @@ pkgname=(
   "${pkgbase}"
 )
 pkgver=2.45
-pkgrel=4
+pkgrel=5
 _pkgdesc=(
   "A set of programs to assemble and"
   "manipulate binary and object files"
@@ -81,7 +81,13 @@ _pkgdesc=(
 )
 pkgdesc="${_pkgdesc[*]}"
 arch=(
+  "aarch64"
+  "armv8l"
+  "armv7l"
   'i686'
+  "mips"
+  "pentium4"
+  "powerpc"
   'x86_64'
 )
 url="http://www.gnu.org/software/binutils"
