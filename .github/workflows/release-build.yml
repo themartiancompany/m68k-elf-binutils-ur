@@ -828,14 +828,15 @@ jobs:
       - name:
           Installs build dependencies.
         run: |
-          _evmfs="false" \
+          ( _evmfs="false" \
             recipe-get \
               -o \
                 "array" \
               -d \
                 " " \
               "PKGBUILD" \
-              "makedepends" > \
+              "makedepends" || \
+            true ) > \
             "${HOME}/makedepends"
           for _pkg in $(cat "${HOME}/makedepends"); do \
             _depend_name="$( \
@@ -1595,12 +1596,24 @@ jobs:
           _evmfs="false" \
           _git_service="github" \
           recipe-get \
+            -v \
             -o \
               "array" \
             -d \
               " " \
             "PKGBUILD" \
-            "makedepends" > \
+            "makedepends" || \
+            true
+          ( _evmfs="false" \
+            _git_service="github" \
+            recipe-get \
+              -o \
+                "array" \
+              -d \
+                " " \
+              "PKGBUILD" \
+              "makedepends" || \
+            true ) > \
           "${HOME}/makedepends"
           # ( _evmfs="false" \
           #   recipe-get \
