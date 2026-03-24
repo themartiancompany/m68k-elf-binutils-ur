@@ -1,3 +1,32 @@
+# SPDX-License-Identifier: AGPL-3.0
+
+#    ----------------------------------------------------------------------
+#    Copyright © 2024, 2025, 2026  Pellegrino Prevete
+#
+#    All rights reserved
+#    ----------------------------------------------------------------------
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of
+#    the License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.
+#    If not, see <https://www.gnu.org/licenses/>.
+
+# Maintainers:
+#   Truocolo
+#     <truocolo@aol.com>
+#     <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
+#   Pellegrino Prevete (dvorak)
+#     <pellegrinoprevete@gmail.com>
+#     <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
 # Maintainer: Jesus Alonso <doragasu at hotmail dot com>
 # NOTE: As I want these packages for Genesis/Megadrive development, they do
 # only support the m68000 CPU. If you want to support other m68k variants,
@@ -8,21 +37,48 @@
 
 _target=m68k-elf
 _target_cpu=m68000
-pkgname=${_target}-binutils
+pkgbase="${_target}-binutils"
+pkgname=(
+  "${pkgbase}"
+)
 pkgver=2.45
 pkgrel=1
-pkgdesc="A set of programs to assemble and manipulate binary and object files (${_target})"
-arch=('i686' 'x86_64')
-url="http://www.gnu.org/software/binutils/"
-license=('GPL')
-depends=('glibc>=2.23' 'zlib')
-options=('staticlibs' '!distcc' '!ccache')
+_pkgdesc=(
+  "A set of programs to assemble and"
+  "manipulate binary and object files"
+  "(${_target})."
+)
+pkgdesc="${_pkgdesc[*]}"
+arch=(
+  'i686'
+  'x86_64'
+)
+url="http://www.gnu.org/software/binutils"
+license=(
+  'GPL'
+)
+depends=(
+  'glibc>=2.23'
+  'zlib'
+)
+makedepends=()
+options=(
+  'staticlibs'
+  '!distcc'
+  '!ccache'
+)
 PKGEXT=".pkg.tar.zst"
-source=(https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz
-        https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz.sig)
-sha256sums=(SKIP
-            SKIP)
-validpgpkeys=(3A24BC1E8FB409FA9F14371813FCEF89DD9E3C4F)
+source=(
+  "https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz"
+  "https://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz.sig"
+)
+sha256sums=(
+  "c50c0e7f9cb188980e2cc97e4537626b1672441815587f1eab69d2a1bfbef5d2"
+  SKIP
+)
+validpgpkeys=(
+  "3A24BC1E8FB409FA9F14371813FCEF89DD9E3C4F"
+)
 prepare() {
   cd binutils-${pkgver}
 
